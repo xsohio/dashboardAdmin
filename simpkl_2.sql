@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2026 at 02:54 AM
+-- Generation Time: Apr 09, 2026 at 06:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -84,7 +84,7 @@ CREATE TABLE `kelas` (
 INSERT INTO `kelas` (`id_kelas`, `Kelas`, `Jurusan`, `id_walikelas`) VALUES
 (1, 'XII RPL 1', 'Rekayasa Perangkat Lunak', 1),
 (2, 'XII RPL 2', 'Rekayasa Perangkat Lunak', 2),
-(3, 'XII TKJ', 'Teknik Komputer Jaringan', 3);
+(6, 'vh', 'vhb', 1);
 
 -- --------------------------------------------------------
 
@@ -98,6 +98,50 @@ CREATE TABLE `kopetensi` (
   `Keterlaksanaan` varchar(50) NOT NULL,
   `id_siswa` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_aktivitas`
+--
+
+CREATE TABLE `log_aktivitas` (
+  `id_log` int(11) NOT NULL,
+  `id_users` int(11) DEFAULT NULL,
+  `aktivitas` varchar(255) DEFAULT NULL,
+  `waktu` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `log_aktivitas`
+--
+
+INSERT INTO `log_aktivitas` (`id_log`, `id_users`, `aktivitas`, `waktu`) VALUES
+(1, 0, 'Menghapus user: siswa1 (ID: 4)', '2026-04-09 01:02:11'),
+(2, 0, 'Menambah user baru: asd', '2026-04-09 01:02:31'),
+(3, 0, 'Menghapus user: asd (ID: 11)', '2026-04-09 01:02:40'),
+(4, 0, 'Menambah user baru: as', '2026-04-09 01:08:19'),
+(5, 0, 'Menghapus user: as (ID: 17)', '2026-04-09 01:08:32'),
+(6, 0, 'Menghapus user: noii (ID: 1)', '2026-04-09 02:23:39'),
+(7, 0, 'Menambah user baru: 1021_rey', '2026-04-09 02:27:47'),
+(8, 0, 'Menambah perusahaan baru: pt', '2026-04-09 03:16:29'),
+(9, 0, 'Menghapus perusahaan: pt', '2026-04-09 03:16:35'),
+(10, 0, 'Menambah pembimbing baru: er', '2026-04-09 03:28:00'),
+(11, 0, 'Menghapus pembimbing: er', '2026-04-09 03:28:10'),
+(12, 0, 'Menghapus siswa: dodo', '2026-04-09 03:31:37'),
+(13, 0, 'Menghapus siswa: Unknown', '2026-04-09 03:31:40'),
+(14, 0, 'Menambah siswa baru: sadad', '2026-04-09 03:32:00'),
+(15, 0, 'Menghapus siswa: sadad', '2026-04-09 03:32:16'),
+(16, 0, 'Menghapus siswa: Unknown', '2026-04-09 03:32:44'),
+(17, 0, 'Menghapus siswa: Unknown', '2026-04-09 03:34:57'),
+(18, 0, 'Menghapus siswa: dodo', '2026-04-09 03:35:30'),
+(19, 0, 'Mengubah data siswa: sadad', '2026-04-09 03:35:44'),
+(20, 0, 'Menambah siswa baru: oij', '2026-04-09 03:35:54'),
+(21, 0, 'Menambah perusahaan baru: pt', '2026-04-09 03:36:28'),
+(22, 0, 'Menambah kelas baru: vh', '2026-04-09 03:37:36'),
+(23, 0, 'Menghapus kelas: vh', '2026-04-09 03:37:42'),
+(24, 0, 'Menambah user baru: d', '2026-04-09 03:42:13'),
+(25, 0, 'Menghapus user: d', '2026-04-09 03:42:16');
 
 -- --------------------------------------------------------
 
@@ -122,7 +166,8 @@ CREATE TABLE `pembimbing_pkl` (
 
 INSERT INTO `pembimbing_pkl` (`id_pembimbing`, `nama`, `jabatan`, `jab_terakhir`, `ttl`, `alamat`, `no_kontak`, `id_perusahaan`) VALUES
 (1, 'Ahmad Fauzi', 'Supervisor IT', 'S1 Teknik Informatika', '1985-03-12', 'Jl. Sudirman No.10', '081111111111', 1),
-(2, 'Dewi Lestari', 'Network Engineer', 'S1 Sistem Informasi', '1990-07-20', 'Jl. Merdeka No.5', '082222222222', 2);
+(2, 'Dewi Lestari', 'Network Engineer', 'S1 Sistem Informasi', '1990-07-20', 'Jl. Merdeka No.5', '082222222222', 2),
+(4, '23', '23', '2332', '0000-00-00', '2323323', '23223', 2);
 
 -- --------------------------------------------------------
 
@@ -146,8 +191,7 @@ CREATE TABLE `perusahaan` (
 INSERT INTO `perusahaan` (`id_perusahaan`, `Nama_perusahaan`, `Alamat`, `telepon`, `bidang`, `kapasitas`) VALUES
 (1, 'PT. Maju Bersama', 'Jl. Sudirman No.45, Jakarta', NULL, 'IT & Software', 10),
 (2, 'CV. Teknologi Nusantara', 'Jl. Gatot Subroto No.12, Bandung', NULL, 'Networking', 5),
-(3, 'PT. Digital Solusi', 'Jl. Ahmad Yani No.8, Surabaya', NULL, 'Web Development', 8),
-(4, 'py', 'd', NULL, 'IT', 2);
+(6, 'pt', 'vhb', NULL, 'cgvj', 9);
 
 -- --------------------------------------------------------
 
@@ -179,7 +223,12 @@ INSERT INTO `siswa` (`id_siswa`, `Nis_siswa`, `Nama_siswa`, `Jenis_kelamin`, `Ag
 (1, '2024001', 'Andi Pratama', 'L', 'Islam', 'Bandung, 12 Jan 2007', '081100000001', 'Jl. Mawar No.1', 'O', 1, 1, 1, 1),
 (2, '2024002', 'Budi Santoso', 'L', 'Islam', 'Jakarta, 05 Mar 2006', '081100000002', 'Jl. Melati No.2', 'A', 2, 2, 2, 2),
 (4, '202400', 'er', 'L', 'Islam', 're', 'r', '', 'A', 1, 2, 1, 1),
-(5, '202400', 'df', 'L', 'Islam', 'Surabaya, 20 Mei 2007', '081100000003', '', 'A', 1, 2, 1, 1);
+(5, '202400', 'df', 'L', 'Islam', 'Surabaya, 20 Mei 2007', '081100000003', '', 'AB', 1, 2, 1, 1),
+(6, '12212', 'Riko', 'L', 'Islam', 'Surabaya, 20 Mei 2007', '08232938', '', 'A', 1, 2, 1, 1),
+(7, '45345353', '453453454', 'L', 'Islam', '80759843759833', '34545', '34533454', 'A', 1, 2, 4, 1),
+(8, 'asdasdas', 'sadad', 'L', 'Islam', 'asdasd', 'as', '', 'A', 1, 2, 4, 1),
+(9, 'udi', 'sadad', 'L', 'Islam', 'asdasd', 'as', '', 'A', 1, 2, 4, 1),
+(13, 'oji', 'oij', 'L', 'Islam', '', '', '', 'A', 6, 2, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -201,14 +250,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `username`, `password`, `role`, `created_at`, `is_deleted`) VALUES
-(1, 'noii', '3456', 'siswa', '2026-04-08 04:02:10', 0),
-(3, 'polo', '34', 'siswa', '2026-04-08 04:04:10', 0),
-(4, 'siswa1', '123', 'pembimbing', '2026-04-08 04:04:41', 0),
+(1, 'noii', '3456', 'siswa', '2026-04-08 04:02:10', 1),
+(3, 'polo', '34', 'siswa', '2026-04-08 04:04:10', 1),
+(4, 'siswa1', '123', 'pembimbing', '2026-04-08 04:04:41', 1),
 (5, '1021_re', '9', 'wakasek', '2026-04-08 04:05:01', 1),
 (6, 'gttfd', '55', 'siswa', '2026-04-08 04:06:15', 1),
 (7, 'B', 'baba', 'siswa', '2026-04-08 04:26:27', 1),
 (8, 'tes', '123', 'siswa', '2026-04-08 04:28:03', 1),
-(9, 'admin', 'admin123', 'admin', '2026-04-08 04:38:41', 0);
+(9, 'admin', 'admin123', 'admin', '2026-04-08 04:38:41', 0),
+(11, 'asd', '123', 'siswa', '2026-04-09 01:02:31', 1),
+(15, 'indranailil', '123', 'siswa', '2026-04-09 01:05:19', 1),
+(17, 'as', 'as', 'siswa', '2026-04-09 01:08:19', 1),
+(19, '1021_rey', 'bjk', 'siswa', '2026-04-09 02:27:47', 0),
+(26, 'd', 'd', 'siswa', '2026-04-09 03:42:13', 1);
 
 -- --------------------------------------------------------
 
@@ -273,6 +327,12 @@ ALTER TABLE `kopetensi`
   ADD KEY `id_siswa` (`id_siswa`);
 
 --
+-- Indexes for table `log_aktivitas`
+--
+ALTER TABLE `log_aktivitas`
+  ADD PRIMARY KEY (`id_log`);
+
+--
 -- Indexes for table `pembimbing_pkl`
 --
 ALTER TABLE `pembimbing_pkl`
@@ -334,7 +394,7 @@ ALTER TABLE `kegiatan`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kelas` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kopetensi`
@@ -343,28 +403,34 @@ ALTER TABLE `kopetensi`
   MODIFY `id_kopetensi` int(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `log_aktivitas`
+--
+ALTER TABLE `log_aktivitas`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
 -- AUTO_INCREMENT for table `pembimbing_pkl`
 --
 ALTER TABLE `pembimbing_pkl`
-  MODIFY `id_pembimbing` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pembimbing` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `perusahaan`
 --
 ALTER TABLE `perusahaan`
-  MODIFY `id_perusahaan` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_perusahaan` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_siswa` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `walikelas`
